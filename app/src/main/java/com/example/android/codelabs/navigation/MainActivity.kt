@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                     null,
                     options
                 )
+                //findNavController(R.id.my_nav_host_fragment).navigate(R.id.setting_action, null, options)
                 true
             }
             R.id.shopping_cart_dest -> {

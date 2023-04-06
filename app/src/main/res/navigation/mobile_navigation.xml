@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/home_dest">
+
+    <activity
+        android:id="@+id/main_Activity2_dest"
+        android:name="com.example.android.codelabs.navigation.MainActivity2"
+        android:label="@string/home"
+        app:dataPattern="https://example.com?userId={userId}">
+
+        <argument
+            android:name="userId"
+            app:argType="string" />
+
+    </activity>
 
     <fragment
         android:id="@+id/home_dest"
@@ -14,6 +27,14 @@
         <action
             android:id="@+id/next_action"
             app:destination="@+id/flow_step_one_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/next_activity"
+            app:destination="@+id/main_Activity2_dest"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

@@ -18,6 +18,7 @@ package com.example.android.codelabs.navigation
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -68,6 +69,10 @@ class HomeFragment : Fragment() {
             val action = HomeFragmentDirections.nextAction(flowStepNumberArg)
             findNavController().navigate(action)
         }*/
+
+        binding.navigateActivityButton.setOnClickListener{
+            findNavController().navigate(R.id.next_activity, bundleOf("userId" to "someUser"), options)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
