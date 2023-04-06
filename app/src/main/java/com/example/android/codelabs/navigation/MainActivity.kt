@@ -21,11 +21,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.navigation.ui.*
 import com.example.android.codelabs.navigation.databinding.NavigationActivityBinding
 import com.google.android.material.navigation.NavigationView
@@ -34,7 +38,7 @@ import com.google.android.material.navigation.NavigationView
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.
  */
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: NavigationActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +72,10 @@ class MainActivity : AppCompatActivity() {
                 Integer.toString(destination.id)
             }
 
-            Toast.makeText(this@MainActivity, "Navigated to $dest",
-                    Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@MainActivity, "Navigated to $dest",
+                Toast.LENGTH_SHORT
+            ).show()
             Log.d("NavigationActivity", "Navigated to $dest")
         }
     }
@@ -89,8 +95,10 @@ class MainActivity : AppCompatActivity() {
         binding.navView?.setupWithNavController(navController)
     }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration) {
+    private fun setupActionBar(
+        navController: NavController,
+        appBarConfig: AppBarConfiguration
+    ) {
         // This allows NavigationUI to decide what label to show in the action bar
         // By using appBarConfig, it will also determine whether to
         // show the up arrow or drawer menu icon
@@ -111,13 +119,37 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-         // Have the NavigationUI look for an action or destination matching the menu
-        // item id and navigate there if found. Else, bubble up to the parent.
-        when(item){
-
+        return when (item.itemId) {
+            R.id.settings_dest -> {
+                findNavController(R.id.my_nav_host_fragment).navigate(
+                    R.id.settings_dest,
+                    null,
+                    options
+                )
+                true
+            }
+            R.id.shopping_cart_dest -> {
+                findNavController(R.id.my_nav_host_fragment).navigate(
+                    R.id.shopping_cart_dest,
+                    null,
+                    options
+                )
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
-//        return item.onNavDestinationSelected(findNavController(R.id.settings_dest))
-//                || super.onOptionsItemSelected(item)
-        return true
+    }
+
+    companion object {
+        val options = navOptions {
+            anim {
+                enter = R.anim.slide_in_right
+                exit = R.anim.slide_out_left
+                popEnter = R.anim.slide_in_left
+                popExit = R.anim.slide_out_right
+            }
+        }
     }
 }

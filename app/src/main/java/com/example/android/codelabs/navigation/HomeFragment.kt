@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.example.android.codelabs.navigation.MainActivity.Companion.options
 import com.example.android.codelabs.navigation.databinding.HomeFragmentBinding
 
 /**
@@ -43,14 +44,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val options = navOptions {
-            anim {
-                enter = R.anim.slide_in_right
-                exit = R.anim.slide_out_left
-                popEnter = R.anim.slide_in_left
-                popExit = R.anim.slide_out_right
-            }
-        }
 
         //Set an OnClickListener, using Navigation.createNavigateOnClickListener()
         binding.navigateDestinationButton.setOnClickListener {

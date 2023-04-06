@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/home_dest">
+
     <fragment
         android:id="@+id/home_dest"
         android:name="com.example.android.codelabs.navigation.HomeFragment"
@@ -66,6 +67,14 @@
             android:defaultValue="Android!" />
 
         <deepLink app:uri="www.example.com/{myarg}" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/shopping_cart_dest"
+        android:name="com.example.android.codelabs.navigation.ShoppingCartFragment"
+        android:label="@string/shopping_cart"
+        tools:layout="@layout/shopping_fragment" >
 
     </fragment>
 
